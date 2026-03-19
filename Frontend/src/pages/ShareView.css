@@ -1,0 +1,42 @@
+.share-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    color: var(--text-primary);
+}
+
+.share-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.share-badge {
+    background: var(--accent-color);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.share-loading,
+.share-error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: var(--text-secondary);
+}
+
+/* Reuse existing message styles or define simplified ones */
+.share-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
