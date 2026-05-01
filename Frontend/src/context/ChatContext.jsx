@@ -6,6 +6,7 @@ const ChatContext = createContext();
 export const useChat = () => useContext(ChatContext);
 
 export const ChatProvider = ({ children }) => {
+    const API = import.meta.env.VITE_API_URL;
     const [threads, setThreads] = useState([]);
     const [currentThread, setCurrentThread] = useState(null);
     const [messages, setMessages] = useState([]);
@@ -24,7 +25,7 @@ export const ChatProvider = ({ children }) => {
         try {
             const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
             if (!token) return;
-            const res = await axios.get('http://localhost:8080/threads', {
+            const res = await axios.get(`${API}/threads`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setThreads(res.data);
@@ -36,7 +37,7 @@ export const ChatProvider = ({ children }) => {
     const loadThread = async (threadId) => {
         try {
             const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
-            const res = await axios.get(`http://localhost:8080/threads/${threadId}`, {
+            const res = await axios.get(`${API}/threads/${threadId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setMessages(res.data);
@@ -50,7 +51,7 @@ export const ChatProvider = ({ children }) => {
     const createNewThread = async () => {
         try {
             const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
-            const res = await axios.post('http://localhost:8080/threads', {}, {
+            const res = await axios.post(`${API}/threads`, {}, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const newThread = res.data;
@@ -65,7 +66,7 @@ export const ChatProvider = ({ children }) => {
     const deleteThread = async (threadId) => {
         try {
             const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
-            await axios.delete(`http://localhost:8080/threads/${threadId}`, {
+            await axios.delete(`${API}/threads/${threadId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setThreads(prev => prev.filter(t => t.threadId !== threadId));
@@ -81,7 +82,7 @@ export const ChatProvider = ({ children }) => {
     const shareThread = async (threadId) => {
         try {
             const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
-            const res = await axios.post(`http://localhost:8080/threads/${threadId}/share`, {}, {
+            const res = await axios.post(`${API}/threads/${threadId}/share`, {}, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             return res.data.shareUrl;
@@ -101,7 +102,7 @@ export const ChatProvider = ({ children }) => {
 
         try {
             const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
-            const res = await axios.post('http://localhost:8080/chat', {
+            const res = await axios.post(`${API}/chat`, {
                 threadId: currentThread.threadId,
                 message: content
             }, {

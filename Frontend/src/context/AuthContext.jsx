@@ -5,6 +5,7 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
+    const API = import.meta.env.VITE_API_URL;
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -22,7 +23,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const response = await fetch('http://localhost:8080/auth/login', {
+            const response = await fetch(`${API}/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }),
@@ -44,7 +45,7 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (name, email, password) => {
         try {
-            const response = await fetch('http://localhost:8080/auth/register', {
+            const response = await fetch(`${API}/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, password }),

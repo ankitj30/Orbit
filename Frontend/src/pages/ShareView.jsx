@@ -13,7 +13,8 @@ const ShareView = () => {
     useEffect(() => {
         const fetchSharedThread = async () => {
             try {
-                const res = await fetch(`http://localhost:8080/share/${threadId}`);
+                const API = import.meta.env.VITE_API_URL;
+                const res = await fetch(`${API}/share/${threadId}`);
                 if (!res.ok) {
                     const err = await res.json();
                     throw new Error(err.message || "Failed to load chat");
