@@ -5,7 +5,7 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-    const API = import.meta.env.VITE_API_URL;
+    const API = import.meta.env.VITE_API_URL || "https://orbit-i5ur.onrender.com";
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 

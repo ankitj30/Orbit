@@ -108,7 +108,7 @@ ThreadRouter.post('/:threadId/share', authenticateUser, async (req, res, next) =
         await thread.save();
 
         // Construct share URL
-        const shareUrl = `http://localhost:5173/share/${threadId}`;
+        const shareUrl = `${req.headers.origin || process.env.FRONTEND_URL || 'http://localhost:5173'}/share/${threadId}`;
 
         res.json({ shareUrl });
     } catch (error) {

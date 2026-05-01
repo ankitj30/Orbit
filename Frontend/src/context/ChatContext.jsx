@@ -6,7 +6,7 @@ const ChatContext = createContext();
 export const useChat = () => useContext(ChatContext);
 
 export const ChatProvider = ({ children }) => {
-    const API = import.meta.env.VITE_API_URL;
+    const API = import.meta.env.VITE_API_URL || "https://orbit-i5ur.onrender.com";
     const [threads, setThreads] = useState([]);
     const [currentThread, setCurrentThread] = useState(null);
     const [messages, setMessages] = useState([]);

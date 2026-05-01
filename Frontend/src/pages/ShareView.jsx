@@ -13,7 +13,7 @@ const ShareView = () => {
     useEffect(() => {
         const fetchSharedThread = async () => {
             try {
-                const API = import.meta.env.VITE_API_URL;
+                const API = import.meta.env.VITE_API_URL || "https://orbit-i5ur.onrender.com";
                 const res = await fetch(`${API}/share/${threadId}`);
                 if (!res.ok) {
                     const err = await res.json();
